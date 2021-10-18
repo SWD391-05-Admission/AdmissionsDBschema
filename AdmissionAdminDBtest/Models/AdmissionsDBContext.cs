@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
 
 namespace AdmissionAdminDBtest.Models
 {
@@ -46,8 +48,6 @@ namespace AdmissionAdminDBtest.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<AdmissionForm>(entity =>
             {
                 entity.ToTable("AdmissionForm");
@@ -128,9 +128,9 @@ namespace AdmissionAdminDBtest.Models
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Dob)
-                    .HasMaxLength(10)
                     .HasColumnName("DOB")
-                    .IsFixedLength(true);
+                    .HasMaxLength(10)
+                    .IsFixedLength();
 
                 entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.Student)
@@ -244,10 +244,12 @@ namespace AdmissionAdminDBtest.Models
             {
                 entity.ToTable("UniMajor");
 
-                entity.HasOne(d => d.MajorNavigation)
+                entity.Property(e => e.MajorId).HasColumnName("MajorID");
+
+                entity.HasOne(d => d.Major)
                     .WithMany(p => p.UniMajors)
-                    .HasForeignKey(d => d.Major)
-                    .HasConstraintName("FK__UniMajor__Major__5535A963");
+                    .HasForeignKey(d => d.MajorId)
+                    .HasConstraintName("FK_UniMajor_Major");
 
                 entity.HasOne(d => d.UniversityNavigation)
                     .WithMany(p => p.UniMajors)

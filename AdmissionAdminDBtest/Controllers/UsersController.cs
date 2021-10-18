@@ -40,6 +40,23 @@ namespace AdmissionAdminDBtest.Controllers
 
             return user;
         }
+        // GET: api/Users/5
+        [HttpGet("GetUserDetails/{id}")]
+        public async Task<ActionResult<User>> GetUserDetails(int id)
+        {
+            var user =  _context.Users
+                                        .Include(user => user.Role)
+                                        .Where(user => user.Id == id)
+                                        .FirstOrDefault();
+                                        
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
 
         // PUT: api/Users/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
