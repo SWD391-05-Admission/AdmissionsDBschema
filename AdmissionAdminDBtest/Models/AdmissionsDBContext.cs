@@ -198,10 +198,12 @@ namespace AdmissionAdminDBtest.Models
             {
                 entity.ToTable("UniAddress");
 
-                entity.HasOne(d => d.DistrictNavigation)
+                entity.Property(e => e.DistrictId).HasColumnName("DistrictID");
+
+                entity.HasOne(d => d.District)
                     .WithMany(p => p.UniAddresses)
-                    .HasForeignKey(d => d.District)
-                    .HasConstraintName("FK__UniAddres__Distr__5070F446");
+                    .HasForeignKey(d => d.DistrictId)
+                    .HasConstraintName("FK_UniAddress_District");
 
                 entity.HasOne(d => d.UniversityNavigation)
                     .WithMany(p => p.UniAddresses)
@@ -213,11 +215,13 @@ namespace AdmissionAdminDBtest.Models
             {
                 entity.ToTable("UniAdmission");
 
-                entity.HasOne(d => d.AdmissionNavigation)
+                entity.Property(e => e.AdmissionId).HasColumnName("AdmissionID");
+
+                entity.HasOne(d => d.Admission)
                     .WithMany(p => p.UniAdmissions)
-                    .HasForeignKey(d => d.Admission)
+                    .HasForeignKey(d => d.AdmissionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UniAdmission_AdmissionForm");
+                    .HasConstraintName("FK_UniAdmission_AdmissionForm1");
 
                 entity.HasOne(d => d.UniversityNavigation)
                     .WithMany(p => p.UniAdmissions)

@@ -11,10 +11,10 @@ namespace AdmissionAdminDBtest.Models
     {
         public int Id { get; set; }
         public string Address { get; set; }
-        public int? District { get; set; }
+        public int? DistrictId { get; set; }
         public int? University { get; set; }
 
-        public virtual District DistrictNavigation { get; set; }
+        public virtual District District { get; set; }
         public virtual University UniversityNavigation { get; set; }
     }
 }

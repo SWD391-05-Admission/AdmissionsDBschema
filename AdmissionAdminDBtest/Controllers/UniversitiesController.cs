@@ -47,9 +47,13 @@ namespace AdmissionAdminDBtest.Controllers
             var university = _context.Universities
                                         .Include(uni => uni.UniMajors)
                                         .ThenInclude(major => major.Major)
-                                     
-                                            
+                                        .Include(address => address.UniAddresses)
+                                         .ThenInclude(district => district.District)
+                                         .Include(admission => admission.UniAdmissions)
+                                         .ThenInclude(admissions => admissions.Admission)
+                                         .Include(img => img.UniImages)
                                         .Where(uni => uni.Id == id)
+                                        
                                         .FirstOrDefault();
 
             if (university == null)

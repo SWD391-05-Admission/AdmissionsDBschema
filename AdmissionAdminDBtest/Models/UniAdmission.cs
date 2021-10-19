@@ -11,9 +11,9 @@ namespace AdmissionAdminDBtest.Models
     {
         public int Id { get; set; }
         public int University { get; set; }
-        public int Admission { get; set; }
+        public int AdmissionId { get; set; }
 
-        public virtual AdmissionForm AdmissionNavigation { get; set; }
+        public virtual AdmissionForm Admission { get; set; }
         public virtual University UniversityNavigation { get; set; }
     }
 }
