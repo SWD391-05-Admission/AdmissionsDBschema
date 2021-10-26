@@ -53,7 +53,6 @@ namespace AdmissionAdminDBtest.Controllers
                                          .ThenInclude(admissions => admissions.Admission)
                                          .Include(img => img.UniImages)
                                         .Where(uni => uni.Id == id)
-                                        
                                         .FirstOrDefault();
 
             if (university == null)

@@ -143,43 +143,53 @@ namespace AdmissionAdminDBtest.Models
             {
                 entity.ToTable("Talkshow");
 
+                entity.Property(e => e.CounselorId).HasColumnName("CounselorID");
+
                 entity.Property(e => e.CreatedDate).HasColumnType("date");
 
                 entity.Property(e => e.IsCancel).HasColumnName("isCancel");
 
                 entity.Property(e => e.IsComplete).HasColumnName("isComplete");
 
+                entity.Property(e => e.MajorId).HasColumnName("MajorID");
+
                 entity.Property(e => e.StartDate).HasColumnType("date");
 
-                entity.HasOne(d => d.CounselorNavigation)
-                    .WithMany(p => p.Talkshows)
-                    .HasForeignKey(d => d.Counselor)
-                    .HasConstraintName("FK_Talkshow_Counselor");
+                entity.Property(e => e.UniversityId).HasColumnName("UniversityID");
 
-                entity.HasOne(d => d.MajorNavigation)
+                entity.HasOne(d => d.Counselor)
                     .WithMany(p => p.Talkshows)
-                    .HasForeignKey(d => d.Major)
-                    .HasConstraintName("FK_Talkshow_Major");
+                    .HasForeignKey(d => d.CounselorId)
+                    .HasConstraintName("FK_Talkshow_Counselor1");
 
-                entity.HasOne(d => d.UniversityNavigation)
+                entity.HasOne(d => d.Major)
                     .WithMany(p => p.Talkshows)
-                    .HasForeignKey(d => d.University)
-                    .HasConstraintName("FK_Talkshow_University");
+                    .HasForeignKey(d => d.MajorId)
+                    .HasConstraintName("FK_Talkshow_Major1");
+
+                entity.HasOne(d => d.University)
+                    .WithMany(p => p.Talkshows)
+                    .HasForeignKey(d => d.UniversityId)
+                    .HasConstraintName("FK_Talkshow_University1");
             });
 
             modelBuilder.Entity<TalkshowTransaction>(entity =>
             {
                 entity.ToTable("TalkshowTransaction");
 
-                entity.HasOne(d => d.TalkshowNavigation)
-                    .WithMany(p => p.TalkshowTransactions)
-                    .HasForeignKey(d => d.Talkshow)
-                    .HasConstraintName("FK_TalkshowTransaction_Talkshow");
+                entity.Property(e => e.TalkshowId).HasColumnName("TalkshowID");
 
-                entity.HasOne(d => d.TransactionNavigation)
+                entity.Property(e => e.TransactionId).HasColumnName("TransactionID");
+
+                entity.HasOne(d => d.Talkshow)
                     .WithMany(p => p.TalkshowTransactions)
-                    .HasForeignKey(d => d.Transaction)
-                    .HasConstraintName("FK_TalkshowTransaction_Transaction");
+                    .HasForeignKey(d => d.TalkshowId)
+                    .HasConstraintName("FK_TalkshowTransaction_Talkshow1");
+
+                entity.HasOne(d => d.Transaction)
+                    .WithMany(p => p.TalkshowTransactions)
+                    .HasForeignKey(d => d.TransactionId)
+                    .HasConstraintName("FK_TalkshowTransaction_Transaction1");
             });
 
             modelBuilder.Entity<Transaction>(entity =>

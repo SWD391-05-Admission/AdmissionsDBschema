@@ -24,13 +24,13 @@ namespace AdmissionAdminDBtest.Models
         public bool? IsComplete { get; set; }
         public bool? IsCancel { get; set; }
         public int? Price { get; set; }
-        public int? Counselor { get; set; }
-        public int? Major { get; set; }
-        public int? University { get; set; }
+        public int? CounselorId { get; set; }
+        public int? MajorId { get; set; }
+        public int? UniversityId { get; set; }
 
-        public virtual Counselor CounselorNavigation { get; set; }
-        public virtual Major MajorNavigation { get; set; }
-        public virtual University UniversityNavigation { get; set; }
+        public virtual Counselor Counselor { get; set; }
+        public virtual Major Major { get; set; }
+        public virtual University University { get; set; }
         public virtual ICollection<Rate> Rates { get; set; }
         public virtual ICollection<Slot> Slots { get; set; }
         public virtual ICollection<TalkshowTransaction> TalkshowTransactions { get; set; }
